@@ -1,0 +1,74 @@
+studnts_management = {}
+
+while True:
+    
+    choose = input(f"How can I help you with?\nType:(Add student / View all students / Search student / Delete student / Exit): ").lower()
+    match choose:
+        case "add student":
+            name = input("Enter your name: ")
+            enrollment= {}
+            
+            while True:
+                age_input = input("Enter your age: ")
+                try:
+                    age = int(age_input)
+                    if age > 0:
+                        break
+                    else:
+                        print("Age must be a positive number. Try again.")
+                except:
+                    print("Enter a valid number")
+
+            while True:       
+                course_input = input("Enter your course. Type Done when you are finished: ").title()
+                if course_input == "Done":
+                    break
+                grade_input = input(f"Enter your grade for {course_input.title()} (0-100): ")
+           
+                try:
+                    grade = int(grade_input)
+                    if 0 <= grade <= 100:
+                        enrollment[course_input] = grade
+                    else:
+                        print("Grade must be between 0 and 100. Try again.")
+                except ValueError:
+                    print("Please enter a valid number.")
+           
+            if enrollment:
+                studnts_management[name] = {
+                     "age": age,
+                     "enrollment": enrollment,
+                     }
+                print(f"{name.title()} registered successfully")
+
+                # print(studnts_grade_management)
+            else:
+                print(f"{name.title()} was not registered because no courses were entered.")
+        
+        case "view all students":
+            if studnts_management:
+                for name, detail in studnts_management.items():
+                    print(f"\nName: {name.title()}\n Age: {detail['age']}\n Enrollments(Course-Grade): {detail['enrollment']}")
+            else:
+                print("There is no students registered")
+
+        case "search student":
+            search_name = input("Enter the name of student you are searching: ")
+            if search_name in studnts_management:
+                print(f"Name: {name.title()}\n Age: {age}\n Enrollments: {[enrollment]}")
+            else:
+                print("Student not found")
+
+        case "delete student":
+            delete_name = input("Enter the name of student you wnat to delete: ")
+            if delete_name in studnts_management:
+                studnts_management.pop(delete_name)
+                print(f"{delete_name.title()} is deleted.") 
+            else:
+                print("Student not found")
+
+        case "exit":
+            break
+
+        case _:
+            print("Invalid input. Try again")
