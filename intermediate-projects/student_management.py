@@ -2,7 +2,7 @@ studnts_management = {}
 
 while True:
     
-    choose = input(f"How can I help you with?\nType:(Add student / View all students / Search student / See Average/ Delete student / Exit): ").lower()
+    choose = input(f"How can I help you with?\nType:(Add student / View all students / Search student / See Average / Delete student / Exit): ").lower()
     match choose:
         case "add student":
             name = input("Enter your name: ")
@@ -67,15 +67,20 @@ while True:
         case "see average":
             average_name = input("Enter the name of student you are searching to see the average : ").lower()
             if average_name in studnts_management:
-                average = studnts_management[average_name]['enrollment'].values()
-                avr = sum(average) / len(average)
-                studnts_management[average_name]['average'] = avr
-                print(f"The average of {average_name.title()} is {avr}")
+                grades = studnts_management[average_name]['enrollment'].values()
+                if grades:
+                    avr = sum(grades) / len(grades)
+                    studnts_management[average_name]['average'] = avr
+                    print(f"The average of {average_name.title()} is {avr}")
 
-                if avr >= 50:
-                    print(f"status: passed")
+                    if avr >= 50:
+                        print(f"Status: Passed")
+                    else:
+                        print(f"Status: Failed")
+
                 else:
-                    print(f"status: failed")
+                    print("No courses enrolled. Cannot calculate the average.")
+
             else:
                 print(f"Student not found")
 
