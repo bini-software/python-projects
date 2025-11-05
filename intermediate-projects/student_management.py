@@ -53,9 +53,14 @@ while True:
                 print("There is no students registered")
 
         case "search student":
-            search_name = input("Enter the name of student you are searching: ")
+            search_name = input("Enter student name: ").lower()
             if search_name in studnts_management:
-                print(f"Name: {name.title()}\n Age: {age}\n Enrollments: {[enrollment]}")
+                student = studnts_management[search_name]
+                print(f"\nName: {search_name.title()}")
+                print(f"Age: {student['age']}")
+                print("Courses and Grades:")
+                for course, grade in student["enrollment"].items():
+                    print(f"  - {course}: {grade}")
             else:
                 print("Student not found")
 
