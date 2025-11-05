@@ -2,9 +2,18 @@ studnts_management = {}
 
 while True:
     
-    choose = input(f"How can I help you with?\nType:(Add student / View all students / Search student / See Average / Delete student / Exit): ").lower()
+    choose = input("""
+Choose an option:   
+1) Add student
+2) View all students
+3) Search student
+4) See average
+5) Delete student
+6) Exit
+    
+Enter your choice: """).lower()
     match choose:
-        case "add student":
+        case "1" | "add student":
             name = input("Enter your name: ")
             enrollment= {}
             
@@ -45,15 +54,17 @@ while True:
             else:
                 print(f"{name.title()} was not registered because no courses were entered.")
         
-        case "view all students":
+        case "2" | "view all students":
             if studnts_management:
                 for name, detail in studnts_management.items():
-                    print(f"\nName: {name.title()}\n Age: {detail['age']}\n Enrollments(Course-Grade): {detail['enrollment']}")
-            else:
-                print("There is no students registered")
+                    print(f"\nName: {name.title()}\n Age: {detail['age']}\n Enrollments(Course:Grade): {detail['enrollment']}")
 
-        case "search student":
+            else:
+                print("There are no students registered")
+
+        case "3" | "search student":
             search_name = input("Enter student name: ").lower()
+            
             if search_name in studnts_management:
                 student = studnts_management[search_name]
                 print(f"\nName: {search_name.title()}")
@@ -64,14 +75,14 @@ while True:
             else:
                 print("Student not found")
 
-        case "see average":
+        case "4" | "see average":
             average_name = input("Enter the name of student you are searching to see the average : ").lower()
             if average_name in studnts_management:
                 grades = studnts_management[average_name]['enrollment'].values()
                 if grades:
                     avr = sum(grades) / len(grades)
                     studnts_management[average_name]['average'] = avr
-                    print(f"The average of {average_name.title()} is {avr}")
+                    print(f"{average_name.title()}'s average grade is {avr}")
 
                     if avr >= 50:
                         print(f"Status: Passed")
@@ -84,7 +95,7 @@ while True:
             else:
                 print(f"Student not found")
 
-        case "delete student":
+        case "5" | "delete student":
             delete_name = input("Enter the name of student you wnat to delete: ")
             if delete_name in studnts_management:
                 studnts_management.pop(delete_name)
@@ -92,8 +103,10 @@ while True:
             else:
                 print("Student not found")
 
-        case "exit":
+        case "6" | "exit":
+            print("Exiting... Goodbye!")
             break
 
         case _:
             print("Invalid input. Try again")
+            
