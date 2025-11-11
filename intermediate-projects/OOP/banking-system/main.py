@@ -66,5 +66,5 @@ while True:
             print("Exiting... Goodbye")
             break
 
-        case "_":
+        case _:
             print("Invalid choice. Try again")
