@@ -14,8 +14,8 @@ class BankAccount:
                 raise ValueError("Amount must greater than 0")
             
             self.balance += amount
-            self.transaction.append(f"[{datetime.now()}] Deposit: ETB {amount}. Balance: ETB {self.balance}")
-            return f"Withdrawal successful. Amount: ETB {amount}. Available balance: ETB {self.balance}"
+            self.transactions.append(f"[{datetime.now()}] Deposit: ETB {amount}. Balance: ETB {self.balance}")
+            return f"Deposit successful. Amount: ETB {amount}. Available balance: ETB {self.balance}"
 
         except Exception as e:
             return f"Error: {e}"
@@ -24,10 +24,10 @@ class BankAccount:
         try:
             amount = float(amount)
             if amount > self.balance:
-                raise ValueError("Insufficiennt balance")
+                raise ValueError("Insufficient balance")
             
             self.balance -= amount
-            self.transaction.append(f"[{datetime.now()}] Withdrawal: ETB {amount}. Balance: ETB {self.balance}")
+            self.transactions.append(f"[{datetime.now()}] Withdrawal: ETB {amount}. Balance: ETB {self.balance}")
             return f"Withdrawal successful. Amount: ETB {amount}. Available balance: ETB {self.balance}"
             
         except Exception as e:
@@ -36,6 +36,5 @@ class BankAccount:
     def check_balance(self):
         return f"Your current balance: ETB {self.balance}"
 
-    def transaction(self):
-        for trans in self.transactions:
-            return trans
+    def show_transaction(self):
+        return self.transactions
