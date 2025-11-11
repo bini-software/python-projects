@@ -1,4 +1,4 @@
-from bank_acount import BankAccount
+from bank_account import BankAccount
 
 print("Welcome to Banking System\nFirst create a bank account.\n")
 
@@ -34,7 +34,7 @@ while True:
     
     choice = input("Choose an option (1-5): ").lower()
     match choice:
-        
+
         case "1" | "deposit":
             amount = input("Enter deposit amount: ")
             message = account.deposit(amount)
