@@ -44,6 +44,9 @@ python main.py
 ## Project Structure
 
 banking_system
+
  account.py      # Contains the BankAccount class (business logic)
+
  main.py         # User interface and interaction
+ 
  README.md       # This file
